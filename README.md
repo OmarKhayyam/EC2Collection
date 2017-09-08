@@ -146,4 +146,4 @@ You may, in some cases, have to specify the region.
 ## The Results
 Download the results from your S3 bucket to see the recommendations, like so,
 
-`aws s3 cp s3://myBucket/mySparkApp.out`
+`aws s3 cp s3://myBucket/mySparkApp.out ./`
