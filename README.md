@@ -1,4 +1,4 @@
-# Pre-Requisites - Workshop on Recommendation Engine using Apache Spark on Amazon Elastic MapReduce (EMR)
+# Workshop on Recommendation Engine using Apache Spark on Amazon Elastic MapReduce (EMR)
 This is the detailed description of the initial setup before attending the workshop on building a Recommendation Engine using Apache Spark running on [Amazon EMR](https://aws.amazon.com/emr/). The workshop uses Python 3 and the [Spark DataFrames API](https://spark.apache.org/docs/2.1.0/sql-programming-guide.html). Amazon EMR comes with python3 installed on all the cluster nodes, we use emr-5.5.0 release for this workshop, and we configure our EMR cluster to have Zeppelin & Spark installed at launch. Refer to the Cloudformation template for more details.
 
 __NB: You may choose to finish all the steps listed here, except the launching of the cluster until much closer to the time you will be attending the workshop, that way you will not incur unnecessary charges for resources used.__
