@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# This script runs as is if you are using 2.7. You will, however, need to make changes if you want to use 3.x.
+# This script also expects the region to be ap-south-1, you may want to change that if required.
+
 import sys,getopt
 from os import remove, removedirs,system
 from os.path import dirname, join, isfile
@@ -52,7 +55,7 @@ for line in topMovies.split("\n"):
 f.close()
 
 # Added this to use S3 as the common store
-system("aws s3 cp "+ratingsFile+" "+destBkt)
+system("aws s3 cp "+ratingsFile+" "+destBkt+" --region ap-south-1")
 
 if n == 0:
     print "No rating provided!"
