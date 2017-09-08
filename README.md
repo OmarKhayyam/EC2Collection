@@ -49,6 +49,8 @@ We could use the AWS Management Console to upload all the files to our bucket, r
 
 ### At this point, the following files should be in the newly created S3 bucket,
 
+*_mySparkAppV3.py_
+
 *_personalRatings.txt_
 
 *_All the files from the Movielens Dataset._
@@ -122,3 +124,26 @@ You can find the Master Node's FQDN in the __Outputs__ tab of your Cloudformatio
 ![](https://github.com/OmarKhayyam/EC2Collection/blob/master/SGandFQDN.png?raw=true)
 
 Click on the security group and add your custom IP address for SSH into the inbound list of allowed IP addresses and ports, for details have a look at [this](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html).
+
+## Download the Spark application into the cluster
+You can do this when you bootstrap the EMR cluster, but we will do this manually here. Notice that you have not setup your AWS crdentials on any of the nodes on the cluster. Log into the master node, whose FQDN you obtained above using ssh, like so,
+
+`ssh -i ~/<path-to-keyfile> hadoop@<FQDN of the master node>`
+
+Once logged in, issue the following command,
+
+`aws s3 cp s3://myBucket/mySparkAppV3.py ./ && chmod u+x ./mySparkAppV3.py`
+
+Do not forget to replace the __myBucket__ string in the above command with your specific bucket name. Exit the ssh session, you will no longer be required to connect to the cluster for the rest of this exercise.
+
+## Add step to your EMR cluster
+You are now all set to run your recommender application,
+
+`aws emr add-steps --cluster-id j-XXXXXXXXXXXXXX --steps Type=CUSTOM_JAR,Name="My Recommender",Jar="command-runner.jar",ActionOnFailure=CONTINUE,Args=[spark-submit,--master,yarn,--deploy-mode,client,--conf,"spark.executor.extraJavaOptions=-XX:ThreadStackSize=2048",--driver-memory,2g,--executor-memory,2g,/home/hadoop/mySparkAppV3.py]`
+
+You may, in some cases, have to specify the region.
+
+## The Results
+Download the results from your S3 bucket to see the recommendations, like so,
+
+`aws s3 cp s3://myBucket/mySparkApp.out`
