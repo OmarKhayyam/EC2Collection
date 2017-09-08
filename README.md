@@ -107,7 +107,7 @@ __EC2 Keypair name__ : Read [here](http://docs.aws.amazon.com/AWSEC2/latest/User
 
 __Log URI__ : This is the location where EMR will store the logs, this is useful later for debugging issues you may face. This should be of the format like `s3://myBucket/EMRLogs`, as you can see, you may use prefixes anywhere and everywhere you see fit.
 
-The cloudformation template that we need to run is part of this Git repository, the filename is __launchclusterV2.template__. 
+The cloudformation template that we need to run is part of this Git repository, the filename is __launchclusterV3.template__. 
 
 1. Proceed to the __Cloudformation__ service from the AWS Management Console.
 2. Click __Create Stack__.
